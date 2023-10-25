@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: "ping_pong"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "H5WEAHYYH53AM44E"	
+    ports:
+      "5432:5432"
+
+  server: 
+    build: server/
+
+    ports:
+      3030:3030
+
+  client:
+
+    build: client/
+
+    network_mode: host
+
+    depends_on:
+      - server

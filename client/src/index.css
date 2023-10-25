@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'pixel';
+    src: url('https://fonts.googleapis.com/css2?family=Handjet:wght@400;500&family=Mooli&family=Open+Sans:wght@400;600&family=Pixelify+Sans:wght@400;500;600;700&display=swap');
+}
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 15px;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+    background: #000;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #fff;
+
+}
+ 
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #ddd;
+}
