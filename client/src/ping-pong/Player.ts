@@ -21,11 +21,12 @@ export default class Player {
         control: 'arrows' | 'ws' | 'none',
         canvas: HTMLCanvasElement,
         ctx: CanvasRenderingContext2D,
-        collision_deviation: number = 0.1
+        collision_deviation: number = 0.11,
+        playerVel: number = 25
     ) {
         this.player = 0;
         this.playerType = playerType;
-        this.playerVel = 15;
+        this.playerVel = playerVel;
         this.playerVeldx = 0;
         this.playersGeometry = playersGeometry;
 
@@ -101,6 +102,55 @@ export default class Player {
 
     drawPlayer(position: 'left' | 'right', ratio_x: number, ratio_y: number) {
         if (position === 'right') {
+            this.ctx.fillStyle = 'green';
+            this.ctx.fillRect(
+                this.canvas.width / 2 -
+                    this.playersGeometry.width * ratio_x -
+                    4,
+                this.player -
+                    (this.playersGeometry.height * ratio_y) / 2 +
+                    this.collision_deviation *
+                        (this.playersGeometry.height * ratio_y) -
+                    2,
+                this.playersGeometry.width * ratio_x,
+                this.playersGeometry.height * ratio_y -
+                    this.collision_deviation *
+                        2 *
+                        (this.playersGeometry.height * ratio_y)
+            );
+            this.ctx.fillStyle = 'blue';
+            this.ctx.fillRect(
+                this.canvas.width / 2 -
+                    this.playersGeometry.width * ratio_x -
+                    2,
+                this.player -
+                    (this.playersGeometry.height * ratio_y) / 2 +
+                    this.collision_deviation *
+                        (this.playersGeometry.height * ratio_y) -
+                    4,
+                this.playersGeometry.width * ratio_x,
+                this.playersGeometry.height * ratio_y -
+                    this.collision_deviation *
+                        2 *
+                        (this.playersGeometry.height * ratio_y)
+            );
+            this.ctx.fillStyle = 'red';
+            this.ctx.fillRect(
+                this.canvas.width / 2 -
+                    this.playersGeometry.width * ratio_x -
+                    2,
+                this.player -
+                    (this.playersGeometry.height * ratio_y) / 2 +
+                    this.collision_deviation *
+                        (this.playersGeometry.height * ratio_y) -
+                    2,
+                this.playersGeometry.width * ratio_x,
+                this.playersGeometry.height * ratio_y -
+                    this.collision_deviation *
+                        2 *
+                        (this.playersGeometry.height * ratio_y)
+            );
+            this.ctx.fillStyle = 'white';
             this.ctx.fillRect(
                 this.canvas.width / 2 - this.playersGeometry.width * ratio_x,
                 this.player -
@@ -114,6 +164,49 @@ export default class Player {
                         (this.playersGeometry.height * ratio_y)
             );
         } else {
+            this.ctx.fillStyle = 'green';
+            this.ctx.fillRect(
+                -this.canvas.width / 2 - 4,
+                this.player -
+                    (this.playersGeometry.height * ratio_y) / 2 +
+                    this.collision_deviation *
+                        (this.playersGeometry.height * ratio_y) -
+                    2,
+                this.playersGeometry.width * ratio_x,
+                this.playersGeometry.height * ratio_y -
+                    this.collision_deviation *
+                        2 *
+                        (this.playersGeometry.height * ratio_y)
+            );
+            this.ctx.fillStyle = 'blue';
+            this.ctx.fillRect(
+                -this.canvas.width / 2 - 2,
+                this.player -
+                    (this.playersGeometry.height * ratio_y) / 2 +
+                    this.collision_deviation *
+                        (this.playersGeometry.height * ratio_y) -
+                    4,
+                this.playersGeometry.width * ratio_x,
+                this.playersGeometry.height * ratio_y -
+                    this.collision_deviation *
+                        2 *
+                        (this.playersGeometry.height * ratio_y)
+            );
+            this.ctx.fillStyle = 'red';
+            this.ctx.fillRect(
+                -this.canvas.width / 2 - 2,
+                this.player -
+                    (this.playersGeometry.height * ratio_y) / 2 +
+                    this.collision_deviation *
+                        (this.playersGeometry.height * ratio_y) -
+                    2,
+                this.playersGeometry.width * ratio_x,
+                this.playersGeometry.height * ratio_y -
+                    this.collision_deviation *
+                        2 *
+                        (this.playersGeometry.height * ratio_y)
+            );
+            this.ctx.fillStyle = 'white';
             this.ctx.fillRect(
                 -this.canvas.width / 2,
                 this.player -

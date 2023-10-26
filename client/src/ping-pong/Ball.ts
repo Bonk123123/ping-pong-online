@@ -9,16 +9,18 @@ export default class Ball {
     private battingCoefficient: number;
     private accelerationCoefficient: number;
     private maxVelocity: number;
+    private battingTimer: boolean;
 
     constructor(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
         this.canvas = canvas;
         this.ctx = ctx;
 
-        this.ball = { x: 0, y: 0, vx: 4, vy: 3 };
-        this.ballRadius = 10;
+        this.ball = { x: 0, y: 0, vx: 6, vy: 6 };
+        this.ballRadius = 8;
         this.battingCoefficient = 0.11;
-        this.accelerationCoefficient = 1.001;
-        this.maxVelocity = 14;
+        this.accelerationCoefficient = 1.0005;
+        this.maxVelocity = 22;
+        this.battingTimer = true;
     }
 
     get getBall() {
@@ -31,6 +33,56 @@ export default class Ball {
     }
 
     drawBall(ratio_x: number, ratio_y: number) {
+        this.ctx.fillStyle = 'green';
+
+        this.ctx.beginPath();
+        this.ctx.ellipse(
+            this.ball.x - this.ballRadius / 2 - 4,
+            this.ball.y - this.ballRadius / 2 - 2,
+            this.ballRadius * ratio_x,
+            this.ballRadius * ratio_y,
+            0,
+            0,
+            Math.PI * 2
+        );
+
+        this.ctx.fill();
+        this.ctx.closePath();
+
+        this.ctx.fillStyle = 'blue';
+
+        this.ctx.beginPath();
+        this.ctx.ellipse(
+            this.ball.x - this.ballRadius / 2 - 2,
+            this.ball.y - this.ballRadius / 2 - 4,
+            this.ballRadius * ratio_x,
+            this.ballRadius * ratio_y,
+            0,
+            0,
+            Math.PI * 2
+        );
+
+        this.ctx.fill();
+        this.ctx.closePath();
+
+        this.ctx.fillStyle = 'red';
+
+        this.ctx.beginPath();
+        this.ctx.ellipse(
+            this.ball.x - this.ballRadius / 2 - 2,
+            this.ball.y - this.ballRadius / 2 - 2,
+            this.ballRadius * ratio_x,
+            this.ballRadius * ratio_y,
+            0,
+            0,
+            Math.PI * 2
+        );
+
+        this.ctx.fill();
+        this.ctx.closePath();
+
+        this.ctx.fillStyle = 'white';
+
         this.ctx.beginPath();
         this.ctx.ellipse(
             this.ball.x - this.ballRadius / 2,
@@ -65,16 +117,28 @@ export default class Ball {
         }
         if (
             this.ball.x + ballX_withRatio >=
-                this.canvas.width / 2 + ballX_withRatio ||
+                this.canvas.width / 2 + ballX_withRatio + this.ballRadius ||
             this.ball.x - ballX_withRatio <=
-                -this.canvas.width / 2 - ballX_withRatio
+                -this.canvas.width / 2 - ballX_withRatio - this.ballRadius
         ) {
             onLose(
                 this.ball.x + ballX_withRatio >= this.canvas.width / 2
                     ? 'right'
                     : 'left'
             );
-            this.ball = { x: 0, y: 0, vx: 4, vy: 4 };
+            this.ball.x + ballX_withRatio >= this.canvas.width / 2
+                ? (this.ball = {
+                      x: 0,
+                      y: 0,
+                      vx: Math.random() * 3 + 5,
+                      vy: Math.random() * 10 - 5,
+                  })
+                : (this.ball = {
+                      x: 0,
+                      y: 0,
+                      vx: -Math.random() * 3 - 5,
+                      vy: Math.random() * 10 - 5,
+                  });
         }
 
         if (
@@ -83,7 +147,8 @@ export default class Ball {
             this.ball.y + ballY_withRatio <=
                 player1.getPlayer + (playersGeometry.height / 2) * ratio_y &&
             this.ball.y - ballY_withRatio >=
-                player1.getPlayer - (playersGeometry.height / 2) * ratio_y
+                player1.getPlayer - (playersGeometry.height / 2) * ratio_y &&
+            this.battingTimer
         ) {
             if (player1.getPlayerVeldx === 0) {
                 this.ball.vx = -this.ball.vx;
@@ -100,6 +165,8 @@ export default class Ball {
                 this.ball.vy +=
                     player1.getPlayerVeldx * this.battingCoefficient;
             }
+            this.battingTimer = false;
+            setTimeout(() => (this.battingTimer = true), 100);
         }
 
         if (
@@ -108,7 +175,8 @@ export default class Ball {
             this.ball.y + ballY_withRatio <=
                 player2.getPlayer + (playersGeometry.height / 2) * ratio_y &&
             this.ball.y - ballY_withRatio >=
-                player2.getPlayer - (playersGeometry.height / 2) * ratio_y
+                player2.getPlayer - (playersGeometry.height / 2) * ratio_y &&
+            this.battingTimer
         ) {
             if (player2.getPlayerVeldx === 0) {
                 this.ball.vx = -this.ball.vx;
@@ -125,17 +193,23 @@ export default class Ball {
                 this.ball.vy +=
                     player2.getPlayerVeldx * this.battingCoefficient;
             }
+            this.battingTimer = false;
+            setTimeout(() => (this.battingTimer = true), 100);
         }
 
         this.ball.x += this.ball.vx;
         this.ball.y += this.ball.vy;
 
-        if (
-            this.ball.vx < this.maxVelocity &&
-            this.ball.vy < this.maxVelocity
-        ) {
+        if (this.ball.vx <= this.maxVelocity) {
             this.ball.vx *= this.accelerationCoefficient;
+        } else {
+            this.ball.vx = this.maxVelocity;
+        }
+
+        if (this.ball.vy <= this.maxVelocity) {
             this.ball.vy *= this.accelerationCoefficient;
+        } else {
+            this.ball.vy = this.maxVelocity;
         }
     }
 }

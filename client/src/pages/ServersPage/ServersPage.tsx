@@ -45,7 +45,7 @@ const ServersPage = () => {
 
     const fetchServers = () => {
         setIsLoading(true);
-        fetch('http://localhost:5001/servers')
+        fetch('http://localhost:5000/servers')
             .then((response) => response.json())
             .then((json) => setServers(json));
         setIsLoading(false);

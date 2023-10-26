@@ -1,7 +1,6 @@
 import { Socket } from 'socket.io-client';
 import Ball from './Ball';
 import Player from './Player';
-
 export default class PingPong {
     private animation: number;
     private canvas: HTMLCanvasElement;
@@ -50,7 +49,7 @@ export default class PingPong {
         this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
         if (!this.ctx) throw new Error('Context is not defined');
         this.ball = new Ball(this.canvas, this.ctx);
-        this.playersGeometry = { width: 6, height: 150 };
+        this.playersGeometry = { width: 6, height: 100 };
 
         this.gamemode = gamemode;
         this.positionSocketPLayer = position;
@@ -66,7 +65,9 @@ export default class PingPong {
                 this.playersGeometry,
                 'none',
                 this.canvas,
-                this.ctx
+                this.ctx,
+                0.1,
+                20
             );
             this.player2 = new Player(
                 'player',
@@ -248,6 +249,28 @@ export default class PingPong {
         this.player1.drawPlayer('left', RATIO_X, RATIO_Y);
         this.player2.drawPlayer('right', RATIO_X, RATIO_Y);
 
+        this.ctx.fillStyle = 'green';
+        this.ctx.fillRect(
+            -1 * RATIO_X - 1,
+            -this.canvas.height / 2 - 1,
+            2 * RATIO_X,
+            this.canvas.height
+        );
+        this.ctx.fillStyle = 'blue';
+        this.ctx.fillRect(
+            -1 * RATIO_X - 1,
+            -this.canvas.height / 2 - 1,
+            2 * RATIO_X,
+            this.canvas.height
+        );
+        this.ctx.fillStyle = 'red';
+        this.ctx.fillRect(
+            -1 * RATIO_X - 1,
+            -this.canvas.height / 2 - 1,
+            2 * RATIO_X,
+            this.canvas.height
+        );
+        this.ctx.fillStyle = 'white';
         this.ctx.fillRect(
             -1 * RATIO_X,
             -this.canvas.height / 2,
@@ -255,8 +278,9 @@ export default class PingPong {
             this.canvas.height
         );
 
-        if (this.gameStarted)
+        if (this.gameStarted) {
             this.animation = requestAnimationFrame(() => this.display());
+        }
     }
 
     private restart() {

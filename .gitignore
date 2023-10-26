@@ -1,9 +1,6 @@
 /client/node_modules
-/client/Dockerfile
 /client/dist
 /client/build
 /server/node_modules
 /server/dist
 /server/build
-/server/.env
-/server/Dockerfile

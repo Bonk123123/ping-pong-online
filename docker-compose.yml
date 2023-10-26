@@ -5,21 +5,22 @@ services:
     environment:
       POSTGRES_DB: "ping_pong"
       POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "H5WEAHYYH53AM44E"	
-    ports:
-      "5432:5432"
+      POSTGRES_PASSWORD: "postgres"
 
-  server: 
+  server:
     build: server/
 
     ports:
-      3030:3030
+      - 5000:5000
 
   client:
 
     build: client/
 
-    network_mode: host
+    ports:
+      - 5021:5021
+
+    # network_mode: host
 
     depends_on:
       - server
