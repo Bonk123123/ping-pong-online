@@ -249,28 +249,6 @@ export default class PingPong {
         this.player1.drawPlayer('left', RATIO_X, RATIO_Y);
         this.player2.drawPlayer('right', RATIO_X, RATIO_Y);
 
-        this.ctx.fillStyle = 'green';
-        this.ctx.fillRect(
-            -1 * RATIO_X - 1,
-            -this.canvas.height / 2 - 1,
-            2 * RATIO_X,
-            this.canvas.height
-        );
-        this.ctx.fillStyle = 'blue';
-        this.ctx.fillRect(
-            -1 * RATIO_X - 1,
-            -this.canvas.height / 2 - 1,
-            2 * RATIO_X,
-            this.canvas.height
-        );
-        this.ctx.fillStyle = 'red';
-        this.ctx.fillRect(
-            -1 * RATIO_X - 1,
-            -this.canvas.height / 2 - 1,
-            2 * RATIO_X,
-            this.canvas.height
-        );
-        this.ctx.fillStyle = 'white';
         this.ctx.fillRect(
             -1 * RATIO_X,
             -this.canvas.height / 2,

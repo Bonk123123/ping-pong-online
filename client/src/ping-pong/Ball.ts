@@ -33,56 +33,6 @@ export default class Ball {
     }
 
     drawBall(ratio_x: number, ratio_y: number) {
-        this.ctx.fillStyle = 'green';
-
-        this.ctx.beginPath();
-        this.ctx.ellipse(
-            this.ball.x - this.ballRadius / 2 - 4,
-            this.ball.y - this.ballRadius / 2 - 2,
-            this.ballRadius * ratio_x,
-            this.ballRadius * ratio_y,
-            0,
-            0,
-            Math.PI * 2
-        );
-
-        this.ctx.fill();
-        this.ctx.closePath();
-
-        this.ctx.fillStyle = 'blue';
-
-        this.ctx.beginPath();
-        this.ctx.ellipse(
-            this.ball.x - this.ballRadius / 2 - 2,
-            this.ball.y - this.ballRadius / 2 - 4,
-            this.ballRadius * ratio_x,
-            this.ballRadius * ratio_y,
-            0,
-            0,
-            Math.PI * 2
-        );
-
-        this.ctx.fill();
-        this.ctx.closePath();
-
-        this.ctx.fillStyle = 'red';
-
-        this.ctx.beginPath();
-        this.ctx.ellipse(
-            this.ball.x - this.ballRadius / 2 - 2,
-            this.ball.y - this.ballRadius / 2 - 2,
-            this.ballRadius * ratio_x,
-            this.ballRadius * ratio_y,
-            0,
-            0,
-            Math.PI * 2
-        );
-
-        this.ctx.fill();
-        this.ctx.closePath();
-
-        this.ctx.fillStyle = 'white';
-
         this.ctx.beginPath();
         this.ctx.ellipse(
             this.ball.x - this.ballRadius / 2,

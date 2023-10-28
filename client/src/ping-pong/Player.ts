@@ -102,55 +102,6 @@ export default class Player {
 
     drawPlayer(position: 'left' | 'right', ratio_x: number, ratio_y: number) {
         if (position === 'right') {
-            this.ctx.fillStyle = 'green';
-            this.ctx.fillRect(
-                this.canvas.width / 2 -
-                    this.playersGeometry.width * ratio_x -
-                    4,
-                this.player -
-                    (this.playersGeometry.height * ratio_y) / 2 +
-                    this.collision_deviation *
-                        (this.playersGeometry.height * ratio_y) -
-                    2,
-                this.playersGeometry.width * ratio_x,
-                this.playersGeometry.height * ratio_y -
-                    this.collision_deviation *
-                        2 *
-                        (this.playersGeometry.height * ratio_y)
-            );
-            this.ctx.fillStyle = 'blue';
-            this.ctx.fillRect(
-                this.canvas.width / 2 -
-                    this.playersGeometry.width * ratio_x -
-                    2,
-                this.player -
-                    (this.playersGeometry.height * ratio_y) / 2 +
-                    this.collision_deviation *
-                        (this.playersGeometry.height * ratio_y) -
-                    4,
-                this.playersGeometry.width * ratio_x,
-                this.playersGeometry.height * ratio_y -
-                    this.collision_deviation *
-                        2 *
-                        (this.playersGeometry.height * ratio_y)
-            );
-            this.ctx.fillStyle = 'red';
-            this.ctx.fillRect(
-                this.canvas.width / 2 -
-                    this.playersGeometry.width * ratio_x -
-                    2,
-                this.player -
-                    (this.playersGeometry.height * ratio_y) / 2 +
-                    this.collision_deviation *
-                        (this.playersGeometry.height * ratio_y) -
-                    2,
-                this.playersGeometry.width * ratio_x,
-                this.playersGeometry.height * ratio_y -
-                    this.collision_deviation *
-                        2 *
-                        (this.playersGeometry.height * ratio_y)
-            );
-            this.ctx.fillStyle = 'white';
             this.ctx.fillRect(
                 this.canvas.width / 2 - this.playersGeometry.width * ratio_x,
                 this.player -
@@ -164,49 +115,6 @@ export default class Player {
                         (this.playersGeometry.height * ratio_y)
             );
         } else {
-            this.ctx.fillStyle = 'green';
-            this.ctx.fillRect(
-                -this.canvas.width / 2 - 4,
-                this.player -
-                    (this.playersGeometry.height * ratio_y) / 2 +
-                    this.collision_deviation *
-                        (this.playersGeometry.height * ratio_y) -
-                    2,
-                this.playersGeometry.width * ratio_x,
-                this.playersGeometry.height * ratio_y -
-                    this.collision_deviation *
-                        2 *
-                        (this.playersGeometry.height * ratio_y)
-            );
-            this.ctx.fillStyle = 'blue';
-            this.ctx.fillRect(
-                -this.canvas.width / 2 - 2,
-                this.player -
-                    (this.playersGeometry.height * ratio_y) / 2 +
-                    this.collision_deviation *
-                        (this.playersGeometry.height * ratio_y) -
-                    4,
-                this.playersGeometry.width * ratio_x,
-                this.playersGeometry.height * ratio_y -
-                    this.collision_deviation *
-                        2 *
-                        (this.playersGeometry.height * ratio_y)
-            );
-            this.ctx.fillStyle = 'red';
-            this.ctx.fillRect(
-                -this.canvas.width / 2 - 2,
-                this.player -
-                    (this.playersGeometry.height * ratio_y) / 2 +
-                    this.collision_deviation *
-                        (this.playersGeometry.height * ratio_y) -
-                    2,
-                this.playersGeometry.width * ratio_x,
-                this.playersGeometry.height * ratio_y -
-                    this.collision_deviation *
-                        2 *
-                        (this.playersGeometry.height * ratio_y)
-            );
-            this.ctx.fillStyle = 'white';
             this.ctx.fillRect(
                 -this.canvas.width / 2,
                 this.player -

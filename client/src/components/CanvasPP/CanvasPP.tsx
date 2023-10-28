@@ -11,7 +11,7 @@ interface props {
 
 let pp: PingPong;
 
-const CanvasPP: FC<props> = ({ serverId, gamemode, position }) => {
+const CanvasPP: FC<props> = React.memo(({ serverId, gamemode, position }) => {
     const canvasRef = React.useRef<HTMLCanvasElement>(null);
     const location = useLocation();
 
@@ -39,43 +39,11 @@ const CanvasPP: FC<props> = ({ serverId, gamemode, position }) => {
 
     return (
         <div className="h-[100vh] w-[100vw] bg-black">
-            <p className="text-4xl absolute left-1/2 -translate-x-[145px] top-1/3 -translate-y-[calc(50%+1px)] text-green-700 font-pixel">
-                {!gameStarted && 'Waiting'}
-            </p>
-            <p className="text-4xl absolute left-1/2 -translate-x-[146px] top-1/3 -translate-y-[calc(50%+2px)] text-blue-700 font-pixel">
-                {!gameStarted && 'Waiting'}
-            </p>
-            <p className="text-4xl absolute left-1/2 -translate-x-[146px] top-1/3 -translate-y-[calc(50%+1px)] text-red-700 font-pixel">
-                {!gameStarted && 'Waiting'}
-            </p>
             <p className="text-4xl absolute left-1/2 -translate-x-36 top-1/3 -translate-y-1/2 text-white font-pixel">
                 {!gameStarted && 'Waiting'}
             </p>
-
-            <p className="text-4xl absolute left-1/2 translate-x-[15px] top-1/3 -translate-y-[calc(50%+1px)] text-green-700 font-pixel">
-                {!gameStarted && 'Player'}
-            </p>
-            <p className="text-4xl absolute left-1/2 translate-x-[14px] top-1/3 -translate-y-[calc(50%+2px)] text-blue-700 font-pixel">
-                {!gameStarted && 'Player'}
-            </p>
-            <p className="text-4xl absolute left-1/2 translate-x-[14px] top-1/3 -translate-y-[calc(50%+1px)] text-red-700 font-pixel">
-                {!gameStarted && 'Player'}
-            </p>
             <p className="text-4xl absolute left-1/2 translate-x-4 top-1/3 -translate-y-1/2 text-white font-pixel">
                 {!gameStarted && 'Player'}
-            </p>
-
-            <p className="text-4xl absolute left-1/2 -translate-x-[calc(50%+2px)] -translate-y-[1px] text-green-700 font-pixel">
-                {score.player1}&nbsp;&nbsp;&nbsp;&nbsp;
-                {score.player2}
-            </p>
-            <p className="text-4xl absolute left-1/2 -translate-x-[calc(50%+1px)] -translate-y-[2px] text-blue-700 font-pixel">
-                {score.player1}&nbsp;&nbsp;&nbsp;&nbsp;
-                {score.player2}
-            </p>
-            <p className="text-4xl absolute left-1/2 -translate-x-[calc(50%+1px)] -translate-y-[1px] text-red-700 font-pixel">
-                {score.player1}&nbsp;&nbsp;&nbsp;&nbsp;
-                {score.player2}
             </p>
             <p className="text-4xl absolute left-1/2 -translate-x-1/2 text-white font-pixel">
                 {score.player1}&nbsp;&nbsp;&nbsp;&nbsp;
@@ -85,6 +53,6 @@ const CanvasPP: FC<props> = ({ serverId, gamemode, position }) => {
             <canvas ref={canvasRef} className="h-full w-full"></canvas>
         </div>
     );
-};
+});
 
 export default CanvasPP;
