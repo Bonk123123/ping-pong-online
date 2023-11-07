@@ -8,14 +8,16 @@ services:
       POSTGRES_PASSWORD: "postgres"
 
   server:
-    image: bonk123123/ping-pong-online-client:latest
+    build: ./server
+    # image: bonk123123/ping-pong-online-client:latest
 
     ports:
       - 5000:5000
 
   client:
 
-    image: bonk123123/ping-pong-online-server:latest
+    build: ./client
+    # image: bonk123123/ping-pong-online-server:latest
 
     ports:
       - 5021:5021
